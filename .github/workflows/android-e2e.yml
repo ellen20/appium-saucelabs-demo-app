@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        api-level: [34]
+        api-level: [30]
 
     steps:
       - name: Checkout code
@@ -47,15 +47,14 @@ jobs:
         with:
           api-level: ${{ matrix.api-level }}
           target: google_apis
-          arch: x86_64
+          arch: arm64-v8a
           profile: pixel_6
-          avd-name: Pixel_6
           force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          emulator-options: -no-snapshot-load -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
             appium --base-path / &
-            sleep 5
+            sleep 10
             npx wdio run wdio.conf.ts
 
       - name: Upload Allure results
