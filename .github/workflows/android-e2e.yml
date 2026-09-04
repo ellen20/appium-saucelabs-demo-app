@@ -8,7 +8,7 @@ on:
 
 jobs:
   android-e2e:
-    runs-on: macos-latest
+    runs-on: macos-14
 
     strategy:
       matrix:
@@ -53,6 +53,8 @@ jobs:
           emulator-options: -no-snapshot-load -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
+            adb start-server
+            adb devices
             appium --base-path / &
             sleep 10
             npx wdio run wdio.conf.ts
