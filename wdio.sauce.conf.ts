@@ -15,6 +15,11 @@ export const config: WebdriverIO.Config = {
             sauceConnect: false
         }]
     ],
+    
+    mochaOpts: {
+    ui: 'bdd',
+    timeout: 120000,  // 2 minutes — cloud interactions are slower than local
+    },
 
     capabilities: [{
         platformName: 'Android',
