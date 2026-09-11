@@ -7,20 +7,17 @@ export const config: WebdriverIO.Config = {
     user: process.env.SAUCE_USERNAME,
     key: process.env.SAUCE_ACCESS_KEY,
 
-    // Explicitly cleared — otherwise inherited from localConfig and
-    // pointed requests at local Appium's port 4723 instead of Sauce's
-    // cloud endpoint, causing ETIMEDOUT errors.
     hostname: undefined,
     port: undefined,
     path: undefined,
 
     region: 'us',
 
-    // Generous timeout since trial-tier device provisioning has been
-    // slow (one successful run took 2m45s). Retry count set to 0 so a
-    // slow-but-eventually-successful session doesn't get abandoned
-    // client-side while still running server-side, which was leaving
-    // behind "ghost" Running sessions that ate the concurrency slot.
+    mochaOpts: {
+        ui: 'bdd',
+        timeout: 120000,
+        },
+    
     connectionRetryTimeout: 300000,
     connectionRetryCount: 0,
 
