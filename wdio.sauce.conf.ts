@@ -7,10 +7,21 @@ export const config: WebdriverIO.Config = {
     user: process.env.SAUCE_USERNAME,
     key: process.env.SAUCE_ACCESS_KEY,
 
+    hostname: undefined,
+    port: undefined,
+    path: undefined,
+
     region: 'us',
 
+    mochaOpts: {
+        ui: 'bdd',
+        timeout: 120000,
+        },
+    
+    connectionRetryTimeout: 300000,
+    connectionRetryCount: 0,
+
     services: [
-        'appium',
         ['sauce', {
             sauceConnect: false
         }]
